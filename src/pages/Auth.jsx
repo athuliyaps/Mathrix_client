@@ -7,7 +7,7 @@ import { loginAPI, registerAPI } from '../services/allAPIs';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true); // State to toggle between login and register
+  const [isLogin, setIsLogin] = useState(true); 
   const [loggedin, setLoggedin] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [inputData, setInputData] = useState({
@@ -31,7 +31,7 @@ const Auth = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoginData({ email: '', password: '' }); // Clear login fields when registering
+    setLoginData({ email: '', password: '' }); 
     console.log('Inside register handler');
 
     if (inputData.username && inputData.email && inputData.password) {
@@ -60,7 +60,7 @@ const Auth = () => {
       try {
         const result = await loginAPI(loginData);
         console.log('Login result:', result);
-        console.log("Token from result:", result?.data?.token); // Log token specifically
+        console.log("Token from result:", result?.data?.token); 
         if (result?.status === 200) {
           sessionStorage.setItem('user', JSON.stringify(result.data.user));
           sessionStorage.setItem('token', result.data.token);
@@ -71,9 +71,7 @@ const Auth = () => {
            console.log("hasPassed", result.data?.hasPassed);
           
           setLoggedin(true);
-         // setTimeout(() => {
-           // setLoginData({ email: '', password: '' });
-          //}, 2000);
+        
 
           navigate('/dash');
         } else {

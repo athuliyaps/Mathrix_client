@@ -14,17 +14,16 @@ const AddQuestion = ({insideLogout}) => {
     const navigate = useNavigate();
     const location = useLocation();
     
-    // Modal State based on query parameter
     const showModal = new URLSearchParams(location.search).get('modal') === 'true';
     const handleClose = () =>{
-        navigate('/addPage'); // Close modal by removing query param
-        setAddQuestions({question: ''}); // Reset question input
+        navigate('/addPage'); 
+        setAddQuestions({question: ''}); 
     }
-    const handleShow = () => navigate('/addPage?modal=true');  // Open modal
+    const handleShow = () => navigate('/addPage?modal=true');  
 
     const userId = sessionStorage.getItem("userId");
     const token = sessionStorage.getItem("token");
-    console.log("Token inside AddQuestion:", token); // Debugging
+    console.log("Token inside AddQuestion:", token); 
     
 
     useEffect(() => {
@@ -36,7 +35,7 @@ const AddQuestion = ({insideLogout}) => {
             if(!token){
                 alert("Unthorized!Please log in again")
                 navigate("/register")
-                return; //stop execution if token is not present
+                return; 
             }
             const result = await getAPI(token);
             if (result && result.data) {
@@ -69,13 +68,12 @@ const AddQuestion = ({insideLogout}) => {
         }
     }
 
- //remove question
      const handleDeleteQuestion = async(id)=>{
        try{
          const result = await deleteQuestionAPI(id,{headers:{Authorization:`Bearer ${token}`}})
          if(result.status==200){
            alert("Deleted succesfully")
-           fetchQuestions()  //refresh question list
+           fetchQuestions()  
          }else{
            alert("Failed to delete")
          }

@@ -1,17 +1,14 @@
 import axios from 'axios';
 
 const commonAPI = async (httpMethod, url, reqBody, reqHeader) => {
-  // Get the token from sessionStorage
   const token = sessionStorage.getItem("token");
-  console.log("Token inside commonAPI:", token); // Debugging
+  console.log("Token inside commonAPI:", token); 
 
-  // Default headers (include Authorization only if token exists)
   const defaultHeaders = {
     'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add token for authenticated requests only
+    ...(token ? { Authorization: `Bearer ${token}` } : {}), 
   };
 
-  // Request configuration
   const reqConfig = {
     method: httpMethod,
     url,
@@ -19,22 +16,15 @@ const commonAPI = async (httpMethod, url, reqBody, reqHeader) => {
     headers: reqHeader ? { ...defaultHeaders, ...reqHeader.headers } : defaultHeaders,
   };
 
-  console.log("Request Config:", reqConfig); // Debugging log
+  console.log("Request Config:", reqConfig); 
 
   try {
-    return await axios(reqConfig).then(res => res); // Successful response
+    return await axios(reqConfig).then(res => res); 
   } catch (err) {
-    console.error("Axios error:", err.response || err.message); // Log errors
-    return err.response || { error: "Request failed" }; // Return error response
-  }
+    console.error("Axios error:", err.response || err.message); 
+    return err.response || { error: "Request failed" }; 
 };
-
+}
 export default commonAPI
 
 
-
-//  set default headers including authorization
-  //const defaultHeaders = {
-    //'Content-Type':'application/json',
-    //Authorization: `Bearer ${token}`
-  //}

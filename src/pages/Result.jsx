@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; // For passing data and navigation
+import { Link, useLocation, useNavigate } from "react-router-dom"; 
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { FaSmile } from "react-icons/fa";
 import Header from "../components/Header";
@@ -12,7 +12,6 @@ const Result = ({insideLogout}) => {
 
   const passStatus = score > 5 ? "Pass" : "Fail";
 
-  // Mark that start quiz only in first attempt
   useEffect(()=>{
     if(passStatus === "Fail" && !sessionStorage.getItem("QuizStatus")){
       sessionStorage.setItem("quizAstatus","failed")

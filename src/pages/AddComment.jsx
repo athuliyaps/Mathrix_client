@@ -20,13 +20,12 @@ const AddComment = ({ questionId }) => {
         if(questionId){
             fetchComments();
         }
-        }, [questionId]); //refresh comments after adding
+        }, [questionId]); 
         
            
             
         
 
-    // Add a Comment
     const handleAddComment = async () => {
       if(!token){
         alert("Please login to add comment")
@@ -49,10 +48,9 @@ const AddComment = ({ questionId }) => {
         }
     };
 
-    // Fetch Comments for a Specific Question
     const fetchComments = async () => {
         try {
-            const result = await getCommentAPI(questionId, token); // Pass `questionId` to the API
+            const result = await getCommentAPI(questionId, token); 
             if (result && result.data) {
                 setCommentList(result.data);
             } else {
@@ -64,14 +62,12 @@ const AddComment = ({ questionId }) => {
         }
     };
 
-    // open edit comment modal
     const handleEditModal = (comment) => {
       console.log(comment);
         setEditComments({id:comment._id,comment:comment.comment});
         setShowEditModal(true);
     }
 
-    // edit comment
     const handleEditComment = async()=>{
       try{
         const result = await editCommentAPI(editcomment.id,{comment:editcomment.comment},token)
@@ -90,7 +86,6 @@ const AddComment = ({ questionId }) => {
       }
     }
 
-    //remove comment
     const handleDeleteComment = async(id)=>{
       try{
         const result = await deleteCommentAPI(id,token)
@@ -110,7 +105,6 @@ const AddComment = ({ questionId }) => {
             <i class="fa-solid fa-comment fs-3 me-3"></i> comment
             </Button>
 
-            {/* Modal for Adding a New Comment */}
             <Modal show={showModal} onHide={() => setShowModal(false)} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
                     <Modal.Title className='text-primary fw-bolder'>Add Solutions</Modal.Title>
@@ -134,7 +128,6 @@ const AddComment = ({ questionId }) => {
                 </Modal.Footer>
             </Modal>
 
-             {/* Edit modal */}
             <Modal show={showEditModal} onHide={() => setShowEditModal(false)} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Comment</Modal.Title>
@@ -157,7 +150,6 @@ const AddComment = ({ questionId }) => {
             </Modal>
 
                        
-            {/* Display List of Comments */}
             <div className='mb-3'></div>
              <div>
    {commentList.map((comment) => (

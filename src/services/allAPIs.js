@@ -37,20 +37,16 @@ export const deleteQuestionAPI = async(id,token)=>{
 //     return await commonAPI("DELETE",`${SERVERURL}/${id}/delete`)
 // }
 
-// add Comment
 export const addCommentAPI = async (reqBody,token)=>{
     return await commonAPI("POST",`${SERVERURL}/addComment`,reqBody,{headers:{Authorization:`Bearer ${token}`}})
 }
 
-// get comment
 export const getCommentAPI = async (questionId) => {
     return await commonAPI( "GET", `${SERVERURL}/getComment?questionId=${questionId}`, "")
   }
-//edit comment
   export const editCommentAPI = async(id,reqBody,token)=>{
     return await commonAPI("PUT",`${SERVERURL}/comment/${id}/edit`,reqBody,{headers:{Authorization:`Bearer ${token}`}})
   }
-//remove comment
   export const deleteCommentAPI = async(id,token)=>{
     return await commonAPI("DELETE",`${SERVERURL}/comment/${id}/delete`,{headers:{Authorization:`Bearer ${token}`}})
   }

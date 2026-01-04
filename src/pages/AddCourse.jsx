@@ -114,67 +114,53 @@ const handleCloseModal = ()=>{
 
 const filteredCourse = courses.filter(course=>course.title.toLowerCase().includes(search.toLowerCase()))
 
-// pagination logic
 const coursesperpage = 3
 const indexOfLastCourse = currentPage * coursesperpage
 const indexOfFirstCourse = indexOfLastCourse - coursesperpage
 const currentCourses = filteredCourse.slice(indexOfFirstCourse,indexOfLastCourse)
 const totalPages = Math.ceil(filteredCourse.length/coursesperpage) 
 
-// certificate generation
 const handleGenerateCertificate = ()=>{
   const doc = new jsPDF()
- // Set deep orange color (e.g., RGB: 255, 87, 34 for deep orange)
  doc.setTextColor(255, 87, 34);
 
- // Project name: Mathrix ± symbol
  doc.setFontSize(26);
  doc.setFont("helvetica", "bold");
- doc.text("± Mathrix", 80, 30); // Centered at top
+ doc.text("± Mathrix", 80, 30); 
 
- // Certificate heading
  doc.setFontSize(22);
- doc.text("Certificate of Completion", 60, 45); // Slightly below Mathrix
+ doc.text("Certificate of Completion", 60, 45); 
 
- // Reset text color to black
  doc.setTextColor(0, 0, 0);
  doc.setFontSize(16);
 
- // Start the paragraph
  const startY = 70;
  const paragraphStart = `This is to certify that `;
  doc.setFont("times", "normal");
  doc.text(paragraphStart, 30, startY);
 
- // Italic Participant Name
  doc.setFont("times", "italic");
  doc.text(`${participantName}`, doc.getTextWidth(paragraphStart) + 30, startY);
 
- // Continue normal text
  const afterName = ` from `;
  doc.setFont("times", "normal");
  doc.text(afterName, doc.getTextWidth(paragraphStart + participantName) + 30, startY);
 
- // Italic College Name
  doc.setFont("times", "italic");
  doc.text(`${collegeName}`, doc.getTextWidth(paragraphStart + participantName + afterName) + 30, startY);
 
- // Continue normal text
  const middleText = ` has successfully completed the course `;
  doc.setFont("times", "normal");
  doc.text(middleText, doc.getTextWidth(paragraphStart + participantName + afterName + collegeName) + 30, startY);
 
- // Italic Course Name
  doc.setFont("times", "italic");
  const courseText = `"${selectedCourse.title}"`;
  doc.text(courseText, doc.getTextWidth(paragraphStart + participantName + afterName + collegeName + middleText) + 30, startY);
 
- // End sentence
  doc.setFont("times", "normal");
  const endText = `.`;
  doc.text(endText, doc.getTextWidth(paragraphStart + participantName + afterName + collegeName + middleText + courseText) + 30, startY);
 
- // Date below paragraph
  doc.setFontSize(14);
  doc.text(`Date: ${new Date().toLocaleDateString()}`, 30, startY + 20);
 

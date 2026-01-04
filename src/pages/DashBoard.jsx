@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const DashBoard = () => {
   const [username,setUsername] = useState("")
-    const [quizStatus,setQuizStatus] = useState("start") //default as start quiz
+    const [quizStatus,setQuizStatus] = useState("start") 
     const navigate = useNavigate()
 
     // useEffect(() => {
@@ -33,25 +33,24 @@ const DashBoard = () => {
   const user = JSON.parse(sessionStorage.getItem('user') || '{}');
   const hasPassedStorage = sessionStorage.getItem('hasPassed');
   
-  console.log("🧪 Full user object:", user);           // Debug
-  console.log("🧪 sessionStorage hasPassed:", hasPassedStorage); // Debug
+  console.log(" Full user object:", user);           
+  console.log(" sessionStorage hasPassed:", hasPassedStorage); 
   
   if (user && user.username) {
     setUsername(user.username.split(" ")[0]);
     
-    // ✅ FIX 1: Check CORRECT field name + sessionStorage
     if (user.hasPassed === true || 
         hasPassedStorage === 'true' || 
         user.hasPassed === 'true') {
       setQuizStatus("Passed");
-      navigate('/addPage');  // Auto redirect ✅
+      navigate('/addPage');  
     } else {
       setQuizStatus("start");
     }
   } else {
     navigate('/auth');
   }
-}, [navigate]); // ✅ Add navigate as dependency
+}, [navigate]); 
 
     console.log("Quiz status in Dashboard",quizStatus);
     

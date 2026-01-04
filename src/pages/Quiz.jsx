@@ -22,7 +22,6 @@ const quizQuestions = [
   { question: "Which of the following is NOT a valid inner product?", options: ["<f, g> = ∫ fg dx", "<f, g> = fg", "<f, g> = ∫ f'g' dx", "<f, g> = ∫ fg dμ"], correctAnswer: "<f, g> = fg" }
 ];
 
-// Function to shuffle and select 10 random questions
 const getRandomQuestions = (questions, num) => {
   const shuffled = [...questions].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
@@ -43,7 +42,7 @@ const Quiz = () => {
       alert("You have already passed the quiz")
       navigate('/dash')
     }
-    setQuizData(getRandomQuestions(quizQuestions, 10)); // Pick 10 random questions
+    setQuizData(getRandomQuestions(quizQuestions, 10)); 
   }, []);
 
   if (quizData.length === 0) {
@@ -60,12 +59,10 @@ const Quiz = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedAnswer("");
       } else {
-        // Calculate the score and navigate to the result page
         const score = quizData.reduce((total, question, index) => {
           return total + (answers[index] === question.correctAnswer ? 1 : 0);
-        }, selectedAnswer === quizData[currentQuestionIndex].correctAnswer ? 1 : 0); // Include current answer
+        }, selectedAnswer === quizData[currentQuestionIndex].correctAnswer ? 1 : 0); 
          await handleQuizCompletion(score);
-        //  navigate("/result", { state: { score, total: quizData.length } });
       }
     }
   };
@@ -158,7 +155,6 @@ const handleQuizCompletion = async (score) => {
                   {quizData[currentQuestionIndex].question}
                 </Typography>
 
-                {/* Multiple Choice Options */}
                 <FormControl component="fieldset">
                   <RadioGroup
                     value={selectedAnswer}
@@ -170,12 +166,11 @@ const handleQuizCompletion = async (score) => {
                   </RadioGroup>
                 </FormControl>
 
-                {/* Navigation Buttons */}
                 <div className="d-flex justify-content-end mt-4">
                   <Button
                     variant="outline-primary"
                     onClick={handleSaveAndNext}
-                    disabled={!selectedAnswer} // Disable if no answer selected
+                    disabled={!selectedAnswer} 
                   >
                     Save and Next
                   </Button>
