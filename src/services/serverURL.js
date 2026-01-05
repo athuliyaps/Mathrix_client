@@ -1,2 +1,2 @@
-const SERVERURL = 'http://localhost:3000';
+const SERVERURL = 'https://mathrix-server-3.onrender.com';
 export default SERVERURL;
