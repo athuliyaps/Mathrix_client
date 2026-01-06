@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Button, Card, Form, ListGroup, Modal } from 'react-bootstrap'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import CourseList from './courseList'
+// import CourseList from './courseList'
 import CourseCertificate from './courseCertificate'
 import jsPDF from 'jspdf'
 import courseImg from '../assets/course.jpg'
+import CourseList from '../pages/CourseList'
 
 
 
